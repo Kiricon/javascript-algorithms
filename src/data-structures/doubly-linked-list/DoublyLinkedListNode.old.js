@@ -1,8 +1,8 @@
 export default class DoublyLinkedListNode {
-  constructor(value, next, previous) {
+  constructor(value, next = null, previous = null) {
     this.value = value;
-    this.previous = previous || null;
-    this.next = next || null;
+    this.next = next;
+    this.previous = previous;
   }
 
   toString(callback) {
