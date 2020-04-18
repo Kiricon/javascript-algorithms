@@ -24,7 +24,7 @@ the data.
 * `B` [Doubly Linked List](src/data-structures/doubly-linked-list) : 	✅
 * `B` [Queue](src/data-structures/queue) : ✅
 * `B` [Stack](src/data-structures/stack) : ✅
-* `B` [Hash Table](src/data-structures/hash-table)
+* `B` [Hash Table](src/data-structures/hash-table) : ✅
 * `B` [Heap](src/data-structures/heap) - max and min heap versions
 * `B` [Priority Queue](src/data-structures/priority-queue)
 * `A` [Trie](src/data-structures/trie)
