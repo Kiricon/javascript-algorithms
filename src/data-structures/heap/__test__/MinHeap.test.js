@@ -2,6 +2,7 @@ import MinHeap from '../MinHeap';
 import Comparator from '../../../utils/comparator/Comparator';
 
 describe('MinHeap', () => {
+
   it('should create an empty min heap', () => {
     const minHeap = new MinHeap();
 
@@ -169,7 +170,7 @@ describe('MinHeap', () => {
     minHeap.remove('hey', comparator);
     expect(minHeap.toString()).toBe('a,bb,dddd');
   });
-
+  
   it('should remove values from heap and correctly re-order the tree', () => {
     const minHeap = new MinHeap();
 
