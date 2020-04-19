@@ -65,7 +65,7 @@ export default class Heap {
     let index = startIndex || this.heapContainer.length - 1;
     while (
       this.hasParent(index)
-			&& this.pairIsInCorrectOrder(this.heapContainer[index], this.getParent(index))
+&& this.pairIsInCorrectOrder(this.heapContainer[index], this.getParent(index))
     ) {
       const parentIndex = this.getParentIndex(index);
       this.swap(parentIndex, index);
@@ -101,7 +101,10 @@ export default class Heap {
     while (this.hasLeftChild(currentIndex)) {
       if (
         this.hasRightChild(currentIndex)
-        && this.pairIsInCorrectOrder(this.getRightChild(currentIndex), this.getLeftChild(currentIndex))
+        && this.pairIsInCorrectOrder(
+          this.getRightChild(currentIndex),
+          this.getLeftChild(currentIndex),
+        )
       ) {
         nextIndex = this.getRightChildIndex(currentIndex);
       } else {
