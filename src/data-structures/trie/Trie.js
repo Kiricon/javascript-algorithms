@@ -1,110 +1,70 @@
 import TrieNode from './TrieNode';
 
-// Character that we will use for trie tree root.
-const HEAD_CHARACTER = '*';
-
 export default class Trie {
   constructor() {
-    this.head = new TrieNode(HEAD_CHARACTER);
+    this.head = new TrieNode('*');
   }
 
-  /**
-   * @param {string} word
-   * @return {Trie}
-   */
   addWord(word) {
-    const characters = Array.from(word);
-    let currentNode = this.head;
+    let curr = this.head;
+    for (let i = 0; i < word.length; i += 1) {
+      if (curr.hasChild(word[i])) {
+        curr = curr.getChild(word[i]);
+        if (i === word.length - 1) curr.isCompleteWord = true;
+      } else {
+        const newNode = curr.addChild(word[i], i === word.length - 1);
+        curr = newNode;
+      }
+    }
+  }
 
-    for (let charIndex = 0; charIndex < characters.length; charIndex += 1) {
-      const isComplete = charIndex === characters.length - 1;
-      currentNode = currentNode.addChild(characters[charIndex], isComplete);
+  doesWordExist(word) {
+    let curr = this.head;
+    for (let i = 0; i < word.length; i += 1) {
+      if (curr.hasChild(word[i])) {
+        curr = curr.getChild(word[i]);
+        if (curr.isCompleteWord && i === word.length - 1) {
+          return true;
+        }
+      } else {
+        return false;
+      }
     }
 
-    return this;
+    return false;
   }
 
-  /**
-   * @param {string} word
-   * @return {Trie}
-   */
   deleteWord(word) {
-    const depthFirstDelete = (currentNode, charIndex = 0) => {
-      if (charIndex >= word.length) {
-        // Return if we're trying to delete the character that is out of word's scope.
-        return;
+    const deepDelete = (node, charIndex) => {
+      if (charIndex >= word.length) return;
+      const child = node.getChild(word[charIndex]);
+      if (!child) return;
+
+      deepDelete(child, charIndex + 1);
+
+      if (charIndex === word.length - 1) {
+        child.isCompleteWord = false;
       }
 
-      const character = word[charIndex];
-      const nextNode = currentNode.getChild(character);
-
-      if (nextNode == null) {
-        // Return if we're trying to delete a word that has not been added to the Trie.
-        return;
-      }
-
-      // Go deeper.
-      depthFirstDelete(nextNode, charIndex + 1);
-
-      // Since we're going to delete a word let's un-mark its last character isCompleteWord flag.
-      if (charIndex === (word.length - 1)) {
-        nextNode.isCompleteWord = false;
-      }
-
-      // childNode is deleted only if:
-      // - childNode has NO children
-      // - childNode.isCompleteWord === false
-      currentNode.removeChild(character);
+      node.removeChild(word[charIndex]);
     };
 
-    // Start depth-first deletion from the head node.
-    depthFirstDelete(this.head);
-
+    deepDelete(this.head, 0);
     return this;
   }
 
-  /**
-   * @param {string} word
-   * @return {string[]}
-   */
   suggestNextCharacters(word) {
-    const lastCharacter = this.getLastCharacterNode(word);
+    let curr = this.head;
+    for (let i = 0; i < word.length; i += 1) {
+      if (!curr.hasChild(word[i])) return null;
 
-    if (!lastCharacter) {
-      return null;
-    }
-
-    return lastCharacter.suggestChildren();
-  }
-
-  /**
-   * Check if complete word exists in Trie.
-   *
-   * @param {string} word
-   * @return {boolean}
-   */
-  doesWordExist(word) {
-    const lastCharacter = this.getLastCharacterNode(word);
-
-    return !!lastCharacter && lastCharacter.isCompleteWord;
-  }
-
-  /**
-   * @param {string} word
-   * @return {TrieNode}
-   */
-  getLastCharacterNode(word) {
-    const characters = Array.from(word);
-    let currentNode = this.head;
-
-    for (let charIndex = 0; charIndex < characters.length; charIndex += 1) {
-      if (!currentNode.hasChild(characters[charIndex])) {
-        return null;
+      if (i === word.length - 1) {
+        return curr.getChild(word[i]).suggestChildren();
       }
 
-      currentNode = currentNode.getChild(characters[charIndex]);
+      curr = curr.getChild(word[i]);
     }
 
-    return currentNode;
+    return null;
   }
 }

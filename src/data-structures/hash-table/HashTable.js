@@ -39,7 +39,7 @@ export default class HashTable {
       const hash = this.hash(key);
       const linkedList = this.buckets[hash];
       const foundNode = linkedList.find({ callback: node => node.key === key });
-      linkedList.delete(foundNode.value);
+      return linkedList.delete(foundNode.value);
     }
 
     return null;
