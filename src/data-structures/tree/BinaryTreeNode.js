@@ -1,153 +1,36 @@
-import Comparator from '../../utils/comparator/Comparator';
+/* eslint-disable no-param-reassign */
 import HashTable from '../hash-table/HashTable';
 
 export default class BinaryTreeNode {
-  /**
-   * @param {*} [value] - node value.
-   */
-  constructor(value = null) {
+  constructor(value) {
+    this.value = value || null;
     this.left = null;
     this.right = null;
     this.parent = null;
-    this.value = value;
-
-    // Any node related meta information may be stored here.
     this.meta = new HashTable();
-
-    // This comparator is used to compare binary tree nodes with each other.
-    this.nodeComparator = new Comparator();
   }
 
-  /**
-   * @return {number}
-   */
-  get leftHeight() {
-    if (!this.left) {
-      return 0;
-    }
-
-    return this.left.height + 1;
-  }
-
-  /**
-   * @return {number}
-   */
-  get rightHeight() {
-    if (!this.right) {
-      return 0;
-    }
-
-    return this.right.height + 1;
-  }
-
-  /**
-   * @return {number}
-   */
-  get height() {
-    return Math.max(this.leftHeight, this.rightHeight);
-  }
-
-  /**
-   * @return {number}
-   */
-  get balanceFactor() {
-    return this.leftHeight - this.rightHeight;
-  }
-
-  /**
-   * Get parent's sibling if it exists.
-   * @return {BinaryTreeNode}
-   */
-  get uncle() {
-    // Check if current node has parent.
-    if (!this.parent) {
-      return undefined;
-    }
-
-    // Check if current node has grand-parent.
-    if (!this.parent.parent) {
-      return undefined;
-    }
-
-    // Check if grand-parent has two children.
-    if (!this.parent.parent.left || !this.parent.parent.right) {
-      return undefined;
-    }
-
-    // So for now we know that current node has grand-parent and this
-    // grand-parent has two children. Let's find out who is the uncle.
-    if (this.nodeComparator.equal(this.parent, this.parent.parent.left)) {
-      // Right one is an uncle.
-      return this.parent.parent.right;
-    }
-
-    // Left one is an uncle.
-    return this.parent.parent.left;
-  }
-
-  /**
-   * @param {*} value
-   * @return {BinaryTreeNode}
-   */
-  setValue(value) {
-    this.value = value;
-
-    return this;
-  }
-
-  /**
-   * @param {BinaryTreeNode} node
-   * @return {BinaryTreeNode}
-   */
   setLeft(node) {
-    // Reset parent for left node since it is going to be detached.
-    if (this.left) {
-      this.left.parent = null;
-    }
-
-    // Attach new node to the left.
+    if (node) node.parent = this;
     this.left = node;
-
-    // Make current node to be a parent for new left one.
-    if (this.left) {
-      this.left.parent = this;
-    }
-
     return this;
   }
 
-  /**
-   * @param {BinaryTreeNode} node
-   * @return {BinaryTreeNode}
-   */
   setRight(node) {
-    // Reset parent for right node since it is going to be detached.
-    if (this.right) {
-      this.right.parent = null;
-    }
-
-    // Attach new node to the right.
+    if (node) node.parent = this;
     this.right = node;
-
-    // Make current node to be a parent for new right one.
-    if (node) {
-      this.right.parent = this;
-    }
-
     return this;
   }
 
-  /**
-   * @param {BinaryTreeNode} nodeToRemove
-   * @return {boolean}
-   */
-  removeChild(nodeToRemove) {
-    if (this.left && this.nodeComparator.equal(this.left, nodeToRemove)) {
+  removeChild(node) {
+    if (!node) return false;
+
+    if (this.left === node) {
       this.left = null;
       return true;
     }
 
-    if (this.right && this.nodeComparator.equal(this.right, nodeToRemove)) {
+    if (this.right === node) {
       this.right = null;
       return true;
     }
@@ -155,65 +38,80 @@ export default class BinaryTreeNode {
     return false;
   }
 
-  /**
-   * @param {BinaryTreeNode} nodeToReplace
-   * @param {BinaryTreeNode} replacementNode
-   * @return {boolean}
-   */
-  replaceChild(nodeToReplace, replacementNode) {
-    if (!nodeToReplace || !replacementNode) {
-      return false;
-    }
+  traverseInOrder() {
+    const arr = [];
+    const deepTraverse = (node) => {
+      if (node.left) deepTraverse(node.left);
+      arr.push(node.value);
+      if (node.right) deepTraverse(node.right);
+    };
 
-    if (this.left && this.nodeComparator.equal(this.left, nodeToReplace)) {
-      this.left = replacementNode;
+    deepTraverse(this);
+    return arr;
+  }
+
+  replaceChild(toBeReplaced, replacement) {
+    if (toBeReplaced === replacement) return true;
+    if (!toBeReplaced || !replacement || !toBeReplaced.parent) return false;
+
+    replacement.parent = toBeReplaced.parent;
+
+
+    if (toBeReplaced.parent.left === toBeReplaced) {
+      replacement.parent.left = replacement;
       return true;
     }
 
-    if (this.right && this.nodeComparator.equal(this.right, nodeToReplace)) {
-      this.right = replacementNode;
+    if (toBeReplaced.parent.right === toBeReplaced) {
+      replacement.parent.right = replacement;
       return true;
     }
 
     return false;
   }
 
-  /**
-   * @param {BinaryTreeNode} sourceNode
-   * @param {BinaryTreeNode} targetNode
-   */
+  get rightHeight() {
+    if (this.right) {
+      return this.right.height + 1;
+    }
+    return 0;
+  }
+
+  get leftHeight() {
+    if (this.left) {
+      return this.left.height + 1;
+    }
+    return 0;
+  }
+
+  get height() {
+    return Math.max(this.rightHeight, this.leftHeight);
+  }
+
+  get balanceFactor() {
+    return this.leftHeight - this.rightHeight;
+  }
+
+  get uncle() {
+    if (!this.parent || !this.parent.parent) return undefined;
+    if (this.parent.parent.left === this.parent) {
+      return this.parent.parent.right || undefined;
+    }
+    return this.parent.parent.left || undefined;
+  }
+
+  setValue(newVal) {
+    this.value = newVal;
+  }
+
   static copyNode(sourceNode, targetNode) {
     targetNode.setValue(sourceNode.value);
     targetNode.setLeft(sourceNode.left);
     targetNode.setRight(sourceNode.right);
   }
 
-  /**
-   * @return {*[]}
-   */
-  traverseInOrder() {
-    let traverse = [];
 
-    // Add left node.
-    if (this.left) {
-      traverse = traverse.concat(this.left.traverseInOrder());
-    }
-
-    // Add root.
-    traverse.push(this.value);
-
-    // Add right node.
-    if (this.right) {
-      traverse = traverse.concat(this.right.traverseInOrder());
-    }
-
-    return traverse;
-  }
-
-  /**
-   * @return {string}
-   */
   toString() {
-    return this.traverseInOrder().toString();
+    return this.traverseInOrder().join(',');
   }
 }

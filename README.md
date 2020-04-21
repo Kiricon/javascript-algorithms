@@ -28,7 +28,7 @@ the data.
 * `B` [Heap](src/data-structures/heap) - max and min heap versions : ✅
 * `B` [Priority Queue](src/data-structures/priority-queue) : ✅
 * `A` [Trie](src/data-structures/trie) : ✅
-* `A` [Tree](src/data-structures/tree)
+* `A` [Tree](src/data-structures/tree) : ✅
   * `A` [Binary Search Tree](src/data-structures/tree/binary-search-tree)
   * `A` [AVL Tree](src/data-structures/tree/avl-tree)
   * `A` [Red-Black Tree](src/data-structures/tree/red-black-tree)
