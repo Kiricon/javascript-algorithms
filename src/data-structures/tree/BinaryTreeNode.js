@@ -24,7 +24,7 @@ export default class BinaryTreeNode {
 
   removeChild(node) {
     if (!node) return false;
-
+    
     if (this.left === node) {
       this.left = null;
       return true;
