@@ -14,16 +14,18 @@ export default class BinarySearchTreeNode extends BinaryTreeNode {
       if (value > node.value) {
         if (!node.right) {
           node.setRight(newNode);
-          return;
+          return null;
         }
         deepInsert(node.right);
       } else {
         if (!node.left) {
           node.setLeft(newNode);
-          return;
+          return null;
         }
         deepInsert(node.left);
       }
+
+      return null;
     };
 
     deepInsert(this);
@@ -72,7 +74,7 @@ export default class BinarySearchTreeNode extends BinaryTreeNode {
       const replacementNode = deleteNode.left || deleteNode.right;
       replacementNode.parent = deleteNode.parent;
       if (deleteNode.parent) {
-      	deleteNode.parent.removeChild(deleteNode);
+        deleteNode.parent.removeChild(deleteNode);
         deleteNode.parent.insert(replacementNode);
         deleteNode.parent = null;
       } else {
