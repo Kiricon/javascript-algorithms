@@ -31,7 +31,7 @@ the data.
 * `A` [Tree](src/data-structures/tree) : ✅
   * `A` [Binary Search Tree](src/data-structures/tree/binary-search-tree) : ✅
   * `A` [AVL Tree](src/data-structures/tree/avl-tree) : ✅
-  * `A` [Red-Black Tree](src/data-structures/tree/red-black-tree)
+  * `A` [Red-Black Tree](src/data-structures/tree/red-black-tree) : ✅
   * `A` [Segment Tree](src/data-structures/tree/segment-tree) - with min/max/sum range queries examples
   * `A` [Fenwick Tree](src/data-structures/tree/fenwick-tree) (Binary Indexed Tree)
 * `A` [Graph](src/data-structures/graph) (both directed and undirected)
