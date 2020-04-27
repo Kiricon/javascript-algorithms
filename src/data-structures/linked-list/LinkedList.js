@@ -93,13 +93,15 @@ export default class LinkedList {
   find(params) {
     let curr = this.head;
     while (curr) {
-      if (this.compareFunction) {
+      if (params.callback && params.callback(curr.value)) {
+        return curr;
+      }
+      if (!params.callback && this.compareFunction) {
         if (this.compareFunction(params.value, curr.value) === 0) {
           return curr;
         }
       } else {
         if (params.value && params.value === curr.value) return curr;
-        if (params.callback && params.callback(curr.value)) return curr;
       }
       curr = curr.next;
     }
@@ -140,5 +142,16 @@ export default class LinkedList {
     }
 
     return list;
+  }
+
+  toArray() {
+    let curr = this.head;
+    const arr = [];
+    while (curr !== null) {
+      arr.push(curr);
+      curr = curr.next;
+    }
+
+    return arr;
   }
 }

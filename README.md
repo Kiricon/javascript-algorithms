@@ -34,7 +34,7 @@ the data.
   * `A` [Red-Black Tree](src/data-structures/tree/red-black-tree) : ✅
   * `A` [Segment Tree](src/data-structures/tree/segment-tree) - with min/max/sum range queries examples : ✅
   * `A` [Fenwick Tree](src/data-structures/tree/fenwick-tree) (Binary Indexed Tree) : ✅
-* `A` [Graph](src/data-structures/graph) (both directed and undirected)
+* `A` [Graph](src/data-structures/graph) (both directed and undirected) : ✅
 * `A` [Disjoint Set](src/data-structures/disjoint-set)
 * `A` [Bloom Filter](src/data-structures/bloom-filter)
 
