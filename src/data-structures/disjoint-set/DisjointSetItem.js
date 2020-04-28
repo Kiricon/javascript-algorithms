@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 export default class DisjointSetItem {
   constructor(value, keyExtractor) {
     this.value = value;
@@ -38,9 +39,16 @@ export default class DisjointSetItem {
   }
 
   static JoinItems(parent, child) {
-    // eslint-disable-next-line no-param-reassign
+    // Let's not have a circular reference
+    if (child.children[parent.getKey()]) {
+      delete child.children[parent.getKey()];
+    }
+
+    if (parent.parent === child) {
+      parent.parent = null;
+    }
+
     parent.children[child.getKey()] = child;
-    // eslint-disable-next-line no-param-reassign
     child.parent = parent;
   }
 
