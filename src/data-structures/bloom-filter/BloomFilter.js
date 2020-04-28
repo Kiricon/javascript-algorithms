@@ -29,7 +29,7 @@ export default class BloomFilter {
 
   mayContain(value) {
     const indices = this.getHashValues(value);
-    for (let i = 0; i < indices.length; i++) {
+    for (let i = 0; i < indices.length; i += 1) {
       if (!this.store.getValue(indices[i])) return false;
     }
     return true;
