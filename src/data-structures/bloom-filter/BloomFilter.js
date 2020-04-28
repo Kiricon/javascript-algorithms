@@ -1,58 +1,11 @@
 export default class BloomFilter {
-  /**
-   * @param {number} size - the size of the storage.
-   */
   constructor(size = 100) {
-    // Bloom filter size directly affects the likelihood of false positives.
-    // The bigger the size the lower the likelihood of false positives.
     this.size = size;
-    this.storage = this.createStore(size);
+    this.store = this.createStore(size);
   }
 
-  /**
-   * @param {string} item
-   */
-  insert(item) {
-    const hashValues = this.getHashValues(item);
-
-    // Set each hashValue index to true.
-    hashValues.forEach(val => this.storage.setValue(val));
-  }
-
-  /**
-   * @param {string} item
-   * @return {boolean}
-   */
-  mayContain(item) {
-    const hashValues = this.getHashValues(item);
-
-    for (let hashIndex = 0; hashIndex < hashValues.length; hashIndex += 1) {
-      if (!this.storage.getValue(hashValues[hashIndex])) {
-        // We know that the item was definitely not inserted.
-        return false;
-      }
-    }
-
-    // The item may or may not have been inserted.
-    return true;
-  }
-
-  /**
-   * Creates the data store for our filter.
-   * We use this method to generate the store in order to
-   * encapsulate the data itself and only provide access
-   * to the necessary methods.
-   *
-   * @param {number} size
-   * @return {Object}
-   */
   createStore(size) {
-    const storage = [];
-
-    // Initialize all indexes to false
-    for (let storageCellIndex = 0; storageCellIndex < size; storageCellIndex += 1) {
-      storage.push(false);
-    }
+    const storage = new Array(size).fill(false);
 
     const storageInterface = {
       getValue(index) {
@@ -66,10 +19,28 @@ export default class BloomFilter {
     return storageInterface;
   }
 
-  /**
-   * @param {string} item
-   * @return {number}
-   */
+  getHashValues(value) {
+    return [
+      this.hash1(value),
+      this.hash2(value),
+      this.hash3(value),
+    ];
+  }
+
+  mayContain(value) {
+    const indices = this.getHashValues(value);
+    for (let i = 0; i < indices.length; i++) {
+      if (!this.store.getValue(indices[i])) return false;
+    }
+    return true;
+  }
+
+  insert(value) {
+    const indices = this.getHashValues(value);
+    indices.forEach(i => this.store.setValue(i));
+    return this;
+  }
+
   hash1(item) {
     let hash = 0;
 
@@ -113,19 +84,5 @@ export default class BloomFilter {
     }
 
     return Math.abs(hash % this.size);
-  }
-
-  /**
-   * Runs all 3 hash functions on the input and returns an array of results.
-   *
-   * @param {string} item
-   * @return {number[]}
-   */
-  getHashValues(item) {
-    return [
-      this.hash1(item),
-      this.hash2(item),
-      this.hash3(item),
-    ];
   }
 }
