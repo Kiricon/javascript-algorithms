@@ -1,7 +1,3 @@
-/**
- * @param {number} number
- * @return {number}
- */
-export default function factorialRecursive(number) {
-  return number > 1 ? number * factorialRecursive(number - 1) : 1;
+export default function factorialRecursive(num) {
+  return num > 0 ? factorialRecursive(num - 1) * num : 1;
 }
