@@ -1,7 +1,3 @@
-/**
- * @param {number} number
- * @return {boolean}
- */
-export default function isEven(number) {
-  return (number & 1) === 0;
+export default function isEven(num) {
+  return (num & 1) !== 1;
 }

@@ -1,15 +1,10 @@
-/**
- * Return the number of bits used in the binary representation of the number.
- *
- * @param {number} number
- * @return {number}
- */
-export default function bitLength(number) {
-  let bitsCounter = 0;
-
-  while ((1 << bitsCounter) <= number) {
-    bitsCounter += 1;
+export default function bitLength(num) {
+  let startNum = 1;
+  let count = 0;
+  while (startNum <= num) {
+    startNum <<= 1;
+    count += 1;
   }
 
-  return bitsCounter;
+  return count;
 }

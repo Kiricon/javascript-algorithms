@@ -1,7 +1,3 @@
-/**
- * @param {number} number
- * @return bool
- */
-export default function isPowerOfTwo(number) {
-  return (number & (number - 1)) === 0;
+export default function isPowerOfTwo(num) {
+  return (num & (num - 1)) === 0;
 }
