@@ -1,29 +1,13 @@
-/**
- * Return a fibonacci sequence as an array.
- *
- * @param n
- * @return {number[]}
- */
-export default function fibonacci(n) {
-  const fibSequence = [1];
-
-  let currentValue = 1;
-  let previousValue = 0;
-
-  if (n === 1) {
-    return fibSequence;
+export default function fibonacci(num) {
+  const nums = [1];
+  let sum = 1;
+  let lastSum = 0;
+  for (let i = 2; i <= num; i++) {
+    const temp = sum;
+    sum += lastSum;
+    nums.push(sum);
+    lastSum = temp;
   }
 
-  let iterationsCounter = n - 1;
-
-  while (iterationsCounter) {
-    currentValue += previousValue;
-    previousValue = currentValue - previousValue;
-
-    fibSequence.push(currentValue);
-
-    iterationsCounter -= 1;
-  }
-
-  return fibSequence;
+  return nums;
 }
