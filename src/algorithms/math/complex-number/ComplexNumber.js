@@ -1,67 +1,55 @@
-import radianToDegree from '../radian/radianToDegree';
-
+/* eslint-disable no-param-reassign */
 export default class ComplexNumber {
-  /**
-   * z = re + im * i
-   * z = radius * e^(i * phase)
-   *
-   * @param {number} [re]
-   * @param {number} [im]
-   */
-  constructor({ re = 0, im = 0 } = {}) {
-    this.re = re;
-    this.im = im;
+  constructor(values = { re: 0, im: 0 }) {
+    // Real Number
+    this.re = values.re || 0;
+    // Imaginary Number
+    this.im = values.im || 0;
   }
 
-  /**
-   * @param {ComplexNumber|number} addend
-   * @return {ComplexNumber}
-   */
-  add(addend) {
-    // Make sure we're dealing with complex number.
-    const complexAddend = this.toComplexNumber(addend);
-
-    return new ComplexNumber({
-      re: this.re + complexAddend.re,
-      im: this.im + complexAddend.im,
-    });
+  makeObject(complexNumber) {
+    let obj = complexNumber;
+    if (typeof complexNumber !== 'object') {
+      obj = { re: complexNumber, im: 0 };
+    }
+    return obj;
   }
 
-  /**
-   * @param {ComplexNumber|number} subtrahend
-   * @return {ComplexNumber}
-   */
-  subtract(subtrahend) {
-    // Make sure we're dealing with complex number.
-    const complexSubtrahend = this.toComplexNumber(subtrahend);
-
-    return new ComplexNumber({
-      re: this.re - complexSubtrahend.re,
-      im: this.im - complexSubtrahend.im,
-    });
+  add(complexNumber) {
+    complexNumber = this.makeObject(complexNumber);
+    return {
+      re: this.re + complexNumber.re,
+      im: this.im + complexNumber.im,
+    };
   }
 
-  /**
-   * @param {ComplexNumber|number} multiplicand
-   * @return {ComplexNumber}
-   */
-  multiply(multiplicand) {
-    // Make sure we're dealing with complex number.
-    const complexMultiplicand = this.toComplexNumber(multiplicand);
+  subtract(complexNumber) {
+    complexNumber = this.makeObject(complexNumber);
 
-    return new ComplexNumber({
-      re: this.re * complexMultiplicand.re - this.im * complexMultiplicand.im,
-      im: this.re * complexMultiplicand.im + this.im * complexMultiplicand.re,
-    });
+    return {
+      re: this.re - complexNumber.re,
+      im: this.im - complexNumber.im,
+    };
   }
 
-  /**
-   * @param {ComplexNumber|number} divider
-   * @return {ComplexNumber}
-   */
+  multiply(complexNumber) {
+    complexNumber = this.makeObject(complexNumber);
+    return {
+      re: (this.re * complexNumber.re) - (this.im * complexNumber.im),
+      im: (this.re * complexNumber.im) + (this.im * complexNumber.re),
+    };
+  }
+
+  conjugate(complexNumber) {
+    return {
+      re: complexNumber.re,
+      im: -1 * complexNumber.im,
+    };
+  }
+
   divide(divider) {
     // Make sure we're dealing with complex number.
-    const complexDivider = this.toComplexNumber(divider);
+    const complexDivider = this.makeObject(divider);
 
     // Get divider conjugate.
     const dividerConjugate = this.conjugate(complexDivider);
@@ -78,30 +66,14 @@ export default class ComplexNumber {
     });
   }
 
-  /**
-   * @param {ComplexNumber|number} number
-   */
-  conjugate(number) {
-    // Make sure we're dealing with complex number.
-    const complexNumber = this.toComplexNumber(number);
-
-    return new ComplexNumber({
-      re: complexNumber.re,
-      im: -1 * complexNumber.im,
-    });
-  }
-
-  /**
-   * @return {number}
-   */
   getRadius() {
     return Math.sqrt((this.re ** 2) + (this.im ** 2));
   }
 
-  /**
-   * @param {boolean} [inRadians]
-   * @return {number}
-   */
+  radianToDegree(radian) {
+    return radian * (180 / Math.PI);
+  }
+
   getPhase(inRadians = true) {
     let phase = Math.atan(Math.abs(this.im) / Math.abs(this.re));
 
@@ -126,35 +98,16 @@ export default class ComplexNumber {
     }
 
     if (!inRadians) {
-      phase = radianToDegree(phase);
+      phase = this.radianToDegree(phase);
     }
 
     return phase;
   }
 
-  /**
-   * @param {boolean} [inRadians]
-   * @return {{radius: number, phase: number}}
-   */
   getPolarForm(inRadians = true) {
     return {
       radius: this.getRadius(),
       phase: this.getPhase(inRadians),
     };
-  }
-
-  /**
-   * Convert real numbers to complex number.
-   * In case if complex number is provided then lefts it as is.
-   *
-   * @param {ComplexNumber|number} number
-   * @return {ComplexNumber}
-   */
-  toComplexNumber(number) {
-    if (number instanceof ComplexNumber) {
-      return number;
-    }
-
-    return new ComplexNumber({ re: number });
   }
 }
