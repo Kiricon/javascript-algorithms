@@ -56,7 +56,7 @@ a set of rules that precisely define a sequence of operations.
   * `B` [Least Common Multiple](src/algorithms/math/least-common-multiple) (LCM) : ✅
   * `B` [Sieve of Eratosthenes](src/algorithms/math/sieve-of-eratosthenes) - finding all prime numbers up to any given limit : ✅
   * `B` [Is Power of Two](src/algorithms/math/is-power-of-two) - check if the number is power of two (naive and bitwise algorithms) : ✅
-  * `B` [Pascal's Triangle](src/algorithms/math/pascal-triangle)
+  * `B` [Pascal's Triangle](src/algorithms/math/pascal-triangle) : ✅
   * `B` [Complex Number](src/algorithms/math/complex-number) - complex numbers and basic operations with them
   * `B` [Radian & Degree](src/algorithms/math/radian) - radians to degree and backwards conversion
   * `B` [Fast Powering](src/algorithms/math/fast-powering)
