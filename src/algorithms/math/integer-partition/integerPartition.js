@@ -1,57 +1,27 @@
-/**
- * @param {number} number
- * @return {number}
- */
-export default function integerPartition(number) {
-  // Create partition matrix for solving this task using Dynamic Programming.
-  const partitionMatrix = Array(number + 1).fill(null).map(() => {
-    return Array(number + 1).fill(null);
-  });
+export default function integarPartition(num) {
+  const comboTable = [];
 
-  // Fill partition matrix with initial values.
-
-  // Let's fill the first row that represents how many ways we would have
-  // to combine the numbers 1, 2, 3, ..., n with number 0. We would have zero
-  // ways obviously since with zero number we may form only zero.
-  for (let numberIndex = 1; numberIndex <= number; numberIndex += 1) {
-    partitionMatrix[0][numberIndex] = 0;
+  // Fill out first row to make things easy
+  comboTable[0] = [1];
+  for (let i = 1; i <= num; i++) {
+    comboTable[0][i] = 0;
   }
 
-  // Let's fill the first column. It represents the number of ways we can form
-  // number zero out of numbers 0, 0 and 1, 0 and 1 and 2, 0 and 1 and 2 and 3, ...
-  // Obviously there is only one way we could form number 0
-  // and it is with number 0 itself.
-  for (let summandIndex = 0; summandIndex <= number; summandIndex += 1) {
-    partitionMatrix[summandIndex][0] = 1;
-  }
-
-  // Now let's go through other possible options of how we could form number m out of
-  // summands 0, 1, ..., m using Dynamic Programming approach.
-  for (let summandIndex = 1; summandIndex <= number; summandIndex += 1) {
-    for (let numberIndex = 1; numberIndex <= number; numberIndex += 1) {
-      if (summandIndex > numberIndex) {
-        // If summand number is bigger then current number itself then just it won't add
-        // any new ways of forming the number. Thus we may just copy the number from row above.
-        partitionMatrix[summandIndex][numberIndex] = partitionMatrix[summandIndex - 1][numberIndex];
+  for (let y = 1; y <= num; y++) {
+    comboTable[y] = [0];
+    for (let x = 1; x <= num; x++) {
+      const comboNum = comboTable[y - 1][x];
+      if (x === y) {
+        comboTable[y][x] = comboNum + 1;
+      } else if (y > x) {
+        comboTable[y][x] = comboNum;
       } else {
-        /*
-         * The number of combinations would equal to number of combinations of forming the same
-         * number but WITHOUT current summand number PLUS number of combinations of forming the
-         * <current number - current summand> number but WITH current summand.
-         *
-         * Example:
-         * Number of ways to form 5 using summands {0, 1, 2} would equal the SUM of:
-         * - number of ways to form 5 using summands {0, 1} (we've excluded summand 2)
-         * - number of ways to form 3 (because 5 - 2 = 3) using summands {0, 1, 2}
-         * (we've included summand 2)
-        */
-        const combosWithoutSummand = partitionMatrix[summandIndex - 1][numberIndex];
-        const combosWithSummand = partitionMatrix[summandIndex][numberIndex - summandIndex];
-
-        partitionMatrix[summandIndex][numberIndex] = combosWithoutSummand + combosWithSummand;
+        const diff = x - y;
+        comboTable[y][x] = comboNum + comboTable[y][diff];
       }
     }
   }
 
-  return partitionMatrix[number][number];
+
+  return comboTable[num][num];
 }
