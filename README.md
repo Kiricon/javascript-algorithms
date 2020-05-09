@@ -104,7 +104,7 @@ a set of rules that precisely define a sequence of operations.
   * `B` [Reverse Traversal](src/algorithms/linked-list/reverse-traversal) : ✅
 * **Trees**
   * `B` [Depth-First Search](src/algorithms/tree/depth-first-search) (DFS)
-  * `B` [Breadth-First Search](src/algorithms/tree/breadth-first-search) (BFS)
+  * `B` [Breadth-First Search](src/algorithms/tree/breadth-first-search) (BFS) : ✅
 * **Graphs**
   * `B` [Depth-First Search](src/algorithms/graph/depth-first-search) (DFS)
   * `B` [Breadth-First Search](src/algorithms/graph/breadth-first-search) (BFS)
