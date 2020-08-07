@@ -11,6 +11,8 @@
     "class-methods-use-this": "off",
     "arrow-body-style": "off",
     "no-loop-func": "off",
-    "no-plusplus": "off"
+    "no-plusplus": "off",
+    "guard-for-in": "off",
+    "no-restricted-syntax": "off"
   }
 }

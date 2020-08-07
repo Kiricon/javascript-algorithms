@@ -65,7 +65,7 @@ a set of rules that precisely define a sequence of operations.
   * `A` [Liu Hui π Algorithm](src/algorithms/math/liu-hui) - approximate π calculations based on N-gons : ✅
   * `A` [Discrete Fourier Transform](src/algorithms/math/fourier-transform) - decompose a function of time (a signal) into the frequencies that make it up 
 * **Sets**
-  * `B` [Cartesian Product](src/algorithms/sets/cartesian-product) - product of multiple sets
+  * `B` [Cartesian Product](src/algorithms/sets/cartesian-product) - product of multiple sets : ✅
   * `B` [Fisher–Yates Shuffle](src/algorithms/sets/fisher-yates) - random permutation of a finite sequence
   * `A` [Power Set](src/algorithms/sets/power-set) - all subsets of a set (bitwise and backtracking solutions)
   * `A` [Permutations](src/algorithms/sets/permutations) (with and without repetitions)

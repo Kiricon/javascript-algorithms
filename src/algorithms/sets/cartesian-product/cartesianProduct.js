@@ -1,27 +1,11 @@
-/**
- * Generates Cartesian Product of two sets.
- * @param {*[]} setA
- * @param {*[]} setB
- * @return {*[]}
- */
-export default function cartesianProduct(setA, setB) {
-  // Check if input sets are not empty.
-  // Otherwise return null since we can't generate Cartesian Product out of them.
-  if (!setA || !setB || !setA.length || !setB.length) {
-    return null;
-  }
-
-  // Init product set.
+export default function cartesianProduct(val1, val2) {
+  if (!val1 || !val2) return null;
   const product = [];
-
-  // Now, let's go through all elements of a first and second set and form all possible pairs.
-  for (let indexA = 0; indexA < setA.length; indexA += 1) {
-    for (let indexB = 0; indexB < setB.length; indexB += 1) {
-      // Add current product pair to the product set.
-      product.push([setA[indexA], setB[indexB]]);
+  for (const i in val1) {
+    for (const j in val2) {
+      product.push([val1[i], val2[j]]);
     }
   }
 
-  // Return cartesian product set.
   return product;
 }
