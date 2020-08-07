@@ -13,6 +13,7 @@
     "no-loop-func": "off",
     "no-plusplus": "off",
     "guard-for-in": "off",
-    "no-restricted-syntax": "off"
+    "no-restricted-syntax": "off",
+    "no-param-reassign": "off"
   }
 }
