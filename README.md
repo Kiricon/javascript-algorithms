@@ -71,7 +71,7 @@ a set of rules that precisely define a sequence of operations.
   - `A` [Combinations](src/algorithms/sets/combinations) (with and without repetitions) : ✅
   - `A` [Longest Common Subsequence](src/algorithms/sets/longest-common-subsequence) (LCS) : ✅
   - `A` [Longest Increasing Subsequence](src/algorithms/sets/longest-increasing-subsequence) : ✅
-  - `A` [Shortest Common Supersequence](src/algorithms/sets/shortest-common-supersequence) (SCS)
+  - `A` [Shortest Common Supersequence](src/algorithms/sets/shortest-common-supersequence) (SCS) : ✅
   - `A` [Knapsack Problem](src/algorithms/sets/knapsack-problem) - "0/1" and "Unbound" ones
   - `A` [Maximum Subarray](src/algorithms/sets/maximum-subarray) - "Brute Force" and "Dynamic Programming" (Kadane's) versions
   - `A` [Combination Sum](src/algorithms/sets/combination-sum) - find all combinations that form specific sum
