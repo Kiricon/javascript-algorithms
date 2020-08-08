@@ -68,7 +68,7 @@ a set of rules that precisely define a sequence of operations.
   - `B` [Fisher–Yates Shuffle](src/algorithms/sets/fisher-yates) - random permutation of a finite sequence : ✅
   - `A` [Power Set](src/algorithms/sets/power-set) - all subsets of a set (bitwise and backtracking solutions) : ✅
   - `A` [Permutations](src/algorithms/sets/permutations) (with and without repetitions) : ✅
-  - `A` [Combinations](src/algorithms/sets/combinations) (with and without repetitions)
+  - `A` [Combinations](src/algorithms/sets/combinations) (with and without repetitions) : ✅
   - `A` [Longest Common Subsequence](src/algorithms/sets/longest-common-subsequence) (LCS)
   - `A` [Longest Increasing Subsequence](src/algorithms/sets/longest-increasing-subsequence)
   - `A` [Shortest Common Supersequence](src/algorithms/sets/shortest-common-supersequence) (SCS)
