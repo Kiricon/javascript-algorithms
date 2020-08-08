@@ -70,7 +70,7 @@ a set of rules that precisely define a sequence of operations.
   - `A` [Permutations](src/algorithms/sets/permutations) (with and without repetitions) : ✅
   - `A` [Combinations](src/algorithms/sets/combinations) (with and without repetitions) : ✅
   - `A` [Longest Common Subsequence](src/algorithms/sets/longest-common-subsequence) (LCS) : ✅
-  - `A` [Longest Increasing Subsequence](src/algorithms/sets/longest-increasing-subsequence)
+  - `A` [Longest Increasing Subsequence](src/algorithms/sets/longest-increasing-subsequence) : ✅
   - `A` [Shortest Common Supersequence](src/algorithms/sets/shortest-common-supersequence) (SCS)
   - `A` [Knapsack Problem](src/algorithms/sets/knapsack-problem) - "0/1" and "Unbound" ones
   - `A` [Maximum Subarray](src/algorithms/sets/maximum-subarray) - "Brute Force" and "Dynamic Programming" (Kadane's) versions
