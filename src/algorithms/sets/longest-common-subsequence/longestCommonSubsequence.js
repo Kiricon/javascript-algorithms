@@ -1,60 +1,47 @@
-/**
- * @param {string[]} set1
- * @param {string[]} set2
- * @return {string[]}
- */
-export default function longestCommonSubsequence(set1, set2) {
-  // Init LCS matrix.
-  const lcsMatrix = Array(set2.length + 1).fill(null).map(() => Array(set1.length + 1).fill(null));
+function getValue(matrix, x, y) {
+  if (y < 0 || y >= matrix.length) return 0;
+  if (x < 0 || x >= matrix[y].length) return 0;
+  return matrix[y][x] || 0;
+}
 
-  // Fill first row with zeros.
-  for (let columnIndex = 0; columnIndex <= set1.length; columnIndex += 1) {
-    lcsMatrix[0][columnIndex] = 0;
-  }
+function buildMatrix(s1, s2) {
+  const subsetMatrix = [];
 
-  // Fill first column with zeros.
-  for (let rowIndex = 0; rowIndex <= set2.length; rowIndex += 1) {
-    lcsMatrix[rowIndex][0] = 0;
-  }
-
-  // Fill rest of the column that correspond to each of two strings.
-  for (let rowIndex = 1; rowIndex <= set2.length; rowIndex += 1) {
-    for (let columnIndex = 1; columnIndex <= set1.length; columnIndex += 1) {
-      if (set1[columnIndex - 1] === set2[rowIndex - 1]) {
-        lcsMatrix[rowIndex][columnIndex] = lcsMatrix[rowIndex - 1][columnIndex - 1] + 1;
-      } else {
-        lcsMatrix[rowIndex][columnIndex] = Math.max(
-          lcsMatrix[rowIndex - 1][columnIndex],
-          lcsMatrix[rowIndex][columnIndex - 1],
-        );
-      }
+  for (let y = 0; y < s1.length; y++) {
+    const char = s1[y];
+    subsetMatrix.push([]);
+    for (let x = 0; x < s2.length; x++) {
+      const leftVal = getValue(subsetMatrix, x - 1, y);
+      const topVal = getValue(subsetMatrix, x, y - 1);
+      let val = Math.max(leftVal, topVal);
+      if (char === s2[x]) val++;
+      subsetMatrix[y][x] = val;
     }
   }
 
-  // Calculate LCS based on LCS matrix.
-  if (!lcsMatrix[set2.length][set1.length]) {
-    // If the length of largest common string is zero then return empty string.
-    return [''];
-  }
+  return subsetMatrix;
+}
 
-  const longestSequence = [];
-  let columnIndex = set1.length;
-  let rowIndex = set2.length;
+export default function longestCommonSubsequence(s1, s2) {
+  const matrix = buildMatrix(s1, s2);
 
-  while (columnIndex > 0 || rowIndex > 0) {
-    if (set1[columnIndex - 1] === set2[rowIndex - 1]) {
-      // Move by diagonal left-top.
-      longestSequence.unshift(set1[columnIndex - 1]);
-      columnIndex -= 1;
-      rowIndex -= 1;
-    } else if (lcsMatrix[rowIndex][columnIndex] === lcsMatrix[rowIndex][columnIndex - 1]) {
-      // Move left.
-      columnIndex -= 1;
-    } else {
-      // Move up.
-      rowIndex -= 1;
-    }
-  }
+  const subSequence = [];
 
-  return longestSequence;
+  const traverse = (x, y) => {
+    if (x < 0 || y < 0) return;
+    const val = getValue(matrix, x, y);
+
+    if (val === 0) return;
+    const top = getValue(matrix, x, y - 1);
+    const left = getValue(matrix, x - 1, y);
+
+    if (top === val) return traverse(x, y - 1);
+    if (left === val) return traverse(x - 1, y);
+    subSequence.unshift(s2[x]);
+    traverse(x - 1, y - 1);
+  };
+
+  traverse(s2.length - 1, s1.length - 1);
+
+  return subSequence;
 }
