@@ -19,8 +19,8 @@ describe('Knapsack', () => {
     expect(knapsack.totalValue).toBe(9);
     expect(knapsack.totalWeight).toBe(7);
     expect(knapsack.selectedItems.length).toBe(2);
-    expect(knapsack.selectedItems[0].toString()).toBe('v5 w4 x 1');
-    expect(knapsack.selectedItems[1].toString()).toBe('v4 w3 x 1');
+    expect(knapsack.selectedItems[1].toString()).toBe('v5 w4 x 1');
+    expect(knapsack.selectedItems[0].toString()).toBe('v4 w3 x 1');
   });
 
   it('should solve 0/1 knapsack problem regardless of items order', () => {
@@ -40,8 +40,8 @@ describe('Knapsack', () => {
     expect(knapsack.totalValue).toBe(9);
     expect(knapsack.totalWeight).toBe(7);
     expect(knapsack.selectedItems.length).toBe(2);
-    expect(knapsack.selectedItems[0].toString()).toBe('v5 w4 x 1');
-    expect(knapsack.selectedItems[1].toString()).toBe('v4 w3 x 1');
+    expect(knapsack.selectedItems[1].toString()).toBe('v5 w4 x 1');
+    expect(knapsack.selectedItems[0].toString()).toBe('v4 w3 x 1');
   });
 
   it('should solve 0/1 knapsack problem with impossible items set', () => {
@@ -150,8 +150,8 @@ describe('Knapsack', () => {
 
     knapsack.solveUnboundedKnapsackProblem();
 
-    expect(knapsack.totalValue).toBe((3 * 84) + (2 * 5) + (1 * 12) + (6 * 10) + (8 * 20));
-    expect(knapsack.totalWeight).toBe((3 * 7) + (2 * 2) + (1 * 3) + (6 * 1) + (8 * 2));
+    expect(knapsack.totalValue).toBe(3 * 84 + 2 * 5 + 1 * 12 + 6 * 10 + 8 * 20);
+    expect(knapsack.totalWeight).toBe(3 * 7 + 2 * 2 + 1 * 3 + 6 * 1 + 8 * 2);
     expect(knapsack.selectedItems.length).toBe(5);
     expect(knapsack.selectedItems[0].toString()).toBe('v84 w7 x 3');
     expect(knapsack.selectedItems[1].toString()).toBe('v20 w2 x 8');
