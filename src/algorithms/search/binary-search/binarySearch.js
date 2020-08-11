@@ -1,44 +1,26 @@
-import Comparator from '../../../utils/comparator/Comparator';
+const defaultComparator = (a, b) => {
+  if (a === b) return 0;
+  return a < b ? -1 : 1;
+};
+function search(start, end, val, arr, comparator) {
+  if (end === start && comparator(arr[start], val) !== 0) return -1;
+  const diff = Math.abs(start - end);
+  const mid = start + Math.floor(diff / 2);
 
-/**
- * Binary search implementation.
- *
- * @param {*[]} sortedArray
- * @param {*} seekElement
- * @param {function(a, b)} [comparatorCallback]
- * @return {number}
- */
-
-export default function binarySearch(sortedArray, seekElement, comparatorCallback) {
-  // Let's create comparator from the comparatorCallback function.
-  // Comparator object will give us common comparison methods like equal() and lessThen().
-  const comparator = new Comparator(comparatorCallback);
-
-  // These two indices will contain current array (sub-array) boundaries.
-  let startIndex = 0;
-  let endIndex = sortedArray.length - 1;
-
-  // Let's continue to split array until boundaries are collapsed
-  // and there is nothing to split anymore.
-  while (startIndex <= endIndex) {
-    // Let's calculate the index of the middle element.
-    const middleIndex = startIndex + Math.floor((endIndex - startIndex) / 2);
-
-    // If we've found the element just return its position.
-    if (comparator.equal(sortedArray[middleIndex], seekElement)) {
-      return middleIndex;
-    }
-
-    // Decide which half to choose for seeking next: left or right one.
-    if (comparator.lessThan(sortedArray[middleIndex], seekElement)) {
-      // Go to the right half of the array.
-      startIndex = middleIndex + 1;
-    } else {
-      // Go to the left half of the array.
-      endIndex = middleIndex - 1;
-    }
+  switch (comparator(arr[mid], val)) {
+    case 0:
+      return mid;
+    case 1:
+      return search(start, mid - 1, val, arr, comparator);
+    case -1:
+      return search(mid + 1, end, val, arr, comparator);
+    default:
+      return -1;
   }
+}
 
-  // Return -1 if we have not found anything.
-  return -1;
+export default function binarySearch(arr, val, comparator) {
+  if (!arr.length) return -1;
+  comparator = comparator || defaultComparator;
+  return search(0, arr.length - 1, val, arr, comparator);
 }
