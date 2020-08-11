@@ -1,22 +1,14 @@
-import Comparator from '../../../utils/comparator/Comparator';
+export default function linearSearch(arr, val, callback) {
+  const results = [];
 
-/**
- * Linear search implementation.
- *
- * @param {*[]} array
- * @param {*} seekElement
- * @param {function(a, b)} [comparatorCallback]
- * @return {number[]}
- */
-export default function linearSearch(array, seekElement, comparatorCallback) {
-  const comparator = new Comparator(comparatorCallback);
-  const foundIndices = [];
-
-  array.forEach((element, index) => {
-    if (comparator.equal(element, seekElement)) {
-      foundIndices.push(index);
+  for (let i = 0; i < arr.length; i++) {
+    if (!!callback && callback(arr[i], val) === 0) {
+      results.push(i);
+      continue;
     }
-  });
 
-  return foundIndices;
+    if (arr[i] === val) results.push(i);
+  }
+
+  return results;
 }
