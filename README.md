@@ -85,7 +85,7 @@ a set of rules that precisely define a sequence of operations.
   - `A` [Regular Expression Matching](src/algorithms/string/regular-expression-matching)
 - **Searches**
   - `B` [Linear Search](src/algorithms/search/linear-search) : ✅
-  - `B` [Jump Search](src/algorithms/search/jump-search) (or Block Search) - search in sorted array
+  - `B` [Jump Search](src/algorithms/search/jump-search) (or Block Search) - search in sorted array : ✅
   - `B` [Binary Search](src/algorithms/search/binary-search) - search in sorted array
   - `B` [Interpolation Search](src/algorithms/search/interpolation-search) - search in uniformly distributed sorted array
 - **Sorting**
