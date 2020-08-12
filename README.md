@@ -93,7 +93,7 @@ a set of rules that precisely define a sequence of operations.
   - `B` [Selection Sort](src/algorithms/sorting/selection-sort) : ✅
   - `B` [Insertion Sort](src/algorithms/sorting/insertion-sort) : ✅
   - `B` [Heap Sort](src/algorithms/sorting/heap-sort) : ✅
-  - `B` [Merge Sort](src/algorithms/sorting/merge-sort)
+  - `B` [Merge Sort](src/algorithms/sorting/merge-sort) : ✅
   - `B` [Quicksort](src/algorithms/sorting/quick-sort) - in-place and non-in-place implementations
   - `B` [Shellsort](src/algorithms/sorting/shell-sort)
   - `B` [Counting Sort](src/algorithms/sorting/counting-sort)
