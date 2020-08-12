@@ -91,7 +91,7 @@ a set of rules that precisely define a sequence of operations.
 - **Sorting**
   - `B` [Bubble Sort](src/algorithms/sorting/bubble-sort) : ✅
   - `B` [Selection Sort](src/algorithms/sorting/selection-sort) : ✅
-  - `B` [Insertion Sort](src/algorithms/sorting/insertion-sort)
+  - `B` [Insertion Sort](src/algorithms/sorting/insertion-sort) : ✅
   - `B` [Heap Sort](src/algorithms/sorting/heap-sort)
   - `B` [Merge Sort](src/algorithms/sorting/merge-sort)
   - `B` [Quicksort](src/algorithms/sorting/quick-sort) - in-place and non-in-place implementations
