@@ -95,7 +95,7 @@ a set of rules that precisely define a sequence of operations.
   - `B` [Heap Sort](src/algorithms/sorting/heap-sort) : ✅
   - `B` [Merge Sort](src/algorithms/sorting/merge-sort) : ✅
   - `B` [Quicksort](src/algorithms/sorting/quick-sort) : ✅
-  - `B` [Shellsort](src/algorithms/sorting/shell-sort)
+  - `B` [Shellsort](src/algorithms/sorting/shell-sort) : ✅
   - `B` [Counting Sort](src/algorithms/sorting/counting-sort)
   - `B` [Radix Sort](src/algorithms/sorting/radix-sort)
 - **Linked Lists**
