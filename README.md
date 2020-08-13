@@ -76,7 +76,7 @@ a set of rules that precisely define a sequence of operations.
   - `A` [Maximum Subarray](src/algorithms/sets/maximum-subarray) - "Brute Force" and "Dynamic Programming" (Kadane's) versions
   - `A` [Combination Sum](src/algorithms/sets/combination-sum) - find all combinations that form specific sum
 - **Strings**
-  - `B` [Hamming Distance](src/algorithms/string/hamming-distance) - number of positions at which the symbols are different
+  - `B` [Hamming Distance](src/algorithms/string/hamming-distance) - number of positions at which the symbols are different : ✅
   - `A` [Levenshtein Distance](src/algorithms/string/levenshtein-distance) - minimum edit distance between two sequences
   - `A` [Knuth–Morris–Pratt Algorithm](src/algorithms/string/knuth-morris-pratt) (KMP Algorithm) - substring search (pattern matching)
   - `A` [Z Algorithm](src/algorithms/string/z-algorithm) - substring search (pattern matching)
