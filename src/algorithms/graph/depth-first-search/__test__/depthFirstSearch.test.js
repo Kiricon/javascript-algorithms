@@ -48,8 +48,12 @@ describe('depthFirstSearch', () => {
       leaveVertex: leaveVertexCallback,
     });
 
-    expect(enterVertexCallback).toHaveBeenCalledTimes(graph.getAllVertices().length);
-    expect(leaveVertexCallback).toHaveBeenCalledTimes(graph.getAllVertices().length);
+    expect(enterVertexCallback).toHaveBeenCalledTimes(
+      graph.getAllVertices().length
+    );
+    expect(leaveVertexCallback).toHaveBeenCalledTimes(
+      graph.getAllVertices().length
+    );
 
     const enterVertexParamsMap = [
       { currentVertex: vertexA, previousVertex: null },
@@ -61,10 +65,18 @@ describe('depthFirstSearch', () => {
       { currentVertex: vertexF, previousVertex: vertexE },
     ];
 
-    for (let callIndex = 0; callIndex < graph.getAllVertices().length; callIndex += 1) {
+    for (
+      let callIndex = 0;
+      callIndex < graph.getAllVertices().length;
+      callIndex += 1
+    ) {
       const params = enterVertexCallback.mock.calls[callIndex][0];
-      expect(params.currentVertex).toEqual(enterVertexParamsMap[callIndex].currentVertex);
-      expect(params.previousVertex).toEqual(enterVertexParamsMap[callIndex].previousVertex);
+      expect(params.currentVertex).toEqual(
+        enterVertexParamsMap[callIndex].currentVertex
+      );
+      expect(params.previousVertex).toEqual(
+        enterVertexParamsMap[callIndex].previousVertex
+      );
     }
 
     const leaveVertexParamsMap = [
@@ -77,10 +89,18 @@ describe('depthFirstSearch', () => {
       { currentVertex: vertexA, previousVertex: null },
     ];
 
-    for (let callIndex = 0; callIndex < graph.getAllVertices().length; callIndex += 1) {
+    for (
+      let callIndex = 0;
+      callIndex < graph.getAllVertices().length;
+      callIndex += 1
+    ) {
       const params = leaveVertexCallback.mock.calls[callIndex][0];
-      expect(params.currentVertex).toEqual(leaveVertexParamsMap[callIndex].currentVertex);
-      expect(params.previousVertex).toEqual(leaveVertexParamsMap[callIndex].previousVertex);
+      expect(params.currentVertex).toEqual(
+        leaveVertexParamsMap[callIndex].currentVertex
+      );
+      expect(params.previousVertex).toEqual(
+        leaveVertexParamsMap[callIndex].previousVertex
+      );
     }
   });
 
@@ -132,34 +152,50 @@ describe('depthFirstSearch', () => {
 
     const enterVertexParamsMap = [
       { currentVertex: vertexA, previousVertex: null },
-      { currentVertex: vertexD, previousVertex: vertexA },
-      { currentVertex: vertexG, previousVertex: vertexD },
-      { currentVertex: vertexE, previousVertex: vertexA },
-      { currentVertex: vertexF, previousVertex: vertexE },
-      { currentVertex: vertexD, previousVertex: vertexF },
-      { currentVertex: vertexG, previousVertex: vertexD },
+      { currentVertex: vertexB, previousVertex: vertexA },
+      { currentVertex: vertexC, previousVertex: vertexB },
+      { currentVertex: vertexD, previousVertex: vertexC },
+      { currentVertex: vertexE, previousVertex: vertexD },
+      { currentVertex: vertexF, previcousVertex: vertexE },
+      { currentVertex: vertexG, previousVertex: vertexF },
     ];
 
-    for (let callIndex = 0; callIndex < graph.getAllVertices().length; callIndex += 1) {
+    for (
+      let callIndex = 0;
+      callIndex < graph.getAllVertices().length;
+      callIndex += 1
+    ) {
       const params = enterVertexCallback.mock.calls[callIndex][0];
-      expect(params.currentVertex).toEqual(enterVertexParamsMap[callIndex].currentVertex);
-      expect(params.previousVertex).toEqual(enterVertexParamsMap[callIndex].previousVertex);
+      expect(params.currentVertex).toEqual(
+        enterVertexParamsMap[callIndex].currentVertex
+      );
+      expect(params.previousVertex).toEqual(
+        enterVertexParamsMap[callIndex].previousVertex
+      );
     }
 
     const leaveVertexParamsMap = [
-      { currentVertex: vertexG, previousVertex: vertexD },
-      { currentVertex: vertexD, previousVertex: vertexA },
-      { currentVertex: vertexG, previousVertex: vertexD },
-      { currentVertex: vertexD, previousVertex: vertexF },
+      { currentVertex: vertexG, previousVertex: vertexF },
       { currentVertex: vertexF, previousVertex: vertexE },
-      { currentVertex: vertexE, previousVertex: vertexA },
+      { currentVertex: vertexE, previousVertex: vertexD },
+      { currentVertex: vertexD, previousVertex: vertexC },
+      { currentVertex: vertexC, previousVertex: vertexB },
+      { currentVertex: vertexB, previousVertex: vertexA },
       { currentVertex: vertexA, previousVertex: null },
     ];
 
-    for (let callIndex = 0; callIndex < graph.getAllVertices().length; callIndex += 1) {
+    for (
+      let callIndex = 0;
+      callIndex < graph.getAllVertices().length;
+      callIndex += 1
+    ) {
       const params = leaveVertexCallback.mock.calls[callIndex][0];
-      expect(params.currentVertex).toEqual(leaveVertexParamsMap[callIndex].currentVertex);
-      expect(params.previousVertex).toEqual(leaveVertexParamsMap[callIndex].previousVertex);
+      expect(params.currentVertex).toEqual(
+        leaveVertexParamsMap[callIndex].currentVertex
+      );
+      expect(params.previousVertex).toEqual(
+        leaveVertexParamsMap[callIndex].previousVertex
+      );
     }
   });
 });
