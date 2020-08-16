@@ -106,7 +106,7 @@ a set of rules that precisely define a sequence of operations.
   - `B` [Breadth-First Search](src/algorithms/tree/breadth-first-search) (BFS) : ✅
 - **Graphs**
   - `B` [Depth-First Search](src/algorithms/graph/depth-first-search) (DFS) : ✅
-  - `B` [Breadth-First Search](src/algorithms/graph/breadth-first-search) (BFS)
+  - `B` [Breadth-First Search](src/algorithms/graph/breadth-first-search) (BFS) : ✅
   - `B` [Kruskal’s Algorithm](src/algorithms/graph/kruskal) - finding Minimum Spanning Tree (MST) for weighted undirected graph
   - `A` [Dijkstra Algorithm](src/algorithms/graph/dijkstra) - finding shortest paths to all graph vertices from single vertex
   - `A` [Bellman-Ford Algorithm](src/algorithms/graph/bellman-ford) - finding shortest paths to all graph vertices from single vertex
