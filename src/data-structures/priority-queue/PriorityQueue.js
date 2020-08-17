@@ -40,4 +40,8 @@ export default class PriorityQueue {
   hasValue(value) {
     return this.heap.find({ value }, this.compareByValue).length > 0;
   }
+
+  isEmpty() {
+    return this.heap.isEmpty();
+  }
 }

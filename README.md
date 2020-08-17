@@ -108,7 +108,7 @@ a set of rules that precisely define a sequence of operations.
   - `B` [Depth-First Search](src/algorithms/graph/depth-first-search) (DFS) : ✅
   - `B` [Breadth-First Search](src/algorithms/graph/breadth-first-search) (BFS) : ✅
   - `B` [Kruskal’s Algorithm](src/algorithms/graph/kruskal) - finding Minimum Spanning Tree (MST) for weighted undirected graph : ✅
-  - `A` [Dijkstra Algorithm](src/algorithms/graph/dijkstra) - finding shortest paths to all graph vertices from single vertex
+  - `A` [Dijkstra Algorithm](src/algorithms/graph/dijkstra) - finding shortest paths to all graph vertices from single vertex : ✅
   - `A` [Bellman-Ford Algorithm](src/algorithms/graph/bellman-ford) - finding shortest paths to all graph vertices from single vertex
   - `A` [Floyd-Warshall Algorithm](src/algorithms/graph/floyd-warshall) - find shortest paths between all pairs of vertices
   - `A` [Detect Cycle](src/algorithms/graph/detect-cycle) - for both directed and undirected graphs (DFS and Disjoint Set based versions)
