@@ -53,8 +53,12 @@ describe('kruskal', () => {
     const minimumSpanningTree = kruskal(graph);
 
     expect(minimumSpanningTree.getWeight()).toBe(24);
-    expect(minimumSpanningTree.getAllVertices().length).toBe(graph.getAllVertices().length);
-    expect(minimumSpanningTree.getAllEdges().length).toBe(graph.getAllVertices().length - 1);
+    expect(minimumSpanningTree.getAllVertices().length).toBe(
+      graph.getAllVertices().length
+    );
+    expect(minimumSpanningTree.getAllEdges().length).toBe(
+      graph.getAllVertices().length - 1
+    );
     expect(minimumSpanningTree.toString()).toBe('E,C,A,B,D,F,G');
   });
 
@@ -84,8 +88,12 @@ describe('kruskal', () => {
     const minimumSpanningTree = kruskal(graph);
 
     expect(minimumSpanningTree.getWeight()).toBe(3);
-    expect(minimumSpanningTree.getAllVertices().length).toBe(graph.getAllVertices().length);
-    expect(minimumSpanningTree.getAllEdges().length).toBe(graph.getAllVertices().length - 1);
+    expect(minimumSpanningTree.getAllVertices().length).toBe(
+      graph.getAllVertices().length
+    );
+    expect(minimumSpanningTree.getAllEdges().length).toBe(
+      graph.getAllVertices().length - 1
+    );
     expect(minimumSpanningTree.toString()).toBe('A,B,C,D');
   });
 });

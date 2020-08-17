@@ -1,62 +1,42 @@
 import Graph from '../../../data-structures/graph/Graph';
-import QuickSort from '../../sorting/quick-sort/QuickSort';
 import DisjointSet from '../../../data-structures/disjoint-set/DisjointSet';
 
-/**
- * @param {Graph} graph
- * @return {Graph}
- */
-export default function kruskal(graph) {
-  // It should fire error if graph is directed since the algorithm works only
-  // for undirected graphs.
-  if (graph.isDirected) {
-    throw new Error('Kruskal\'s algorithms works only for undirected graphs');
+function hasCycle(graph, edge, visited) {
+  if (visited.has(edge.getKey())) return true;
+  visited.add(edge.getKey());
+  const edges = edge.endVertex.getEdges();
+  for (const newEdge of edges) {
+    if (newEdge === edge) continue;
+    if (hasCycle(graph, newEdge, visited)) return true;
   }
 
-  // Init new graph that will contain minimum spanning tree of original graph.
-  const minimumSpanningTree = new Graph();
+  return false;
+}
 
-  // Sort all graph edges in increasing order.
-  const sortingCallbacks = {
-    /**
-     * @param {GraphEdge} graphEdgeA
-     * @param {GraphEdge} graphEdgeB
-     */
-    compareCallback: (graphEdgeA, graphEdgeB) => {
-      if (graphEdgeA.weight === graphEdgeB.weight) {
-        return 1;
-      }
+/**
+ *
+ * @param {Graph} graph
+ */
+export default function kruskal(graph) {
+  if (graph.isDirected) throw "Can't be direct";
+  const visited = new Set();
 
-      return graphEdgeA.weight <= graphEdgeB.weight ? -1 : 1;
-    },
-  };
-  const sortedEdges = new QuickSort(sortingCallbacks).sort(graph.getAllEdges());
-
-  // Create disjoint sets for all graph vertices.
-  const keyCallback = graphVertex => graphVertex.getKey();
-  const disjointSet = new DisjointSet(keyCallback);
-
-  graph.getAllVertices().forEach((graphVertex) => {
-    disjointSet.makeSet(graphVertex);
+  const resultGraph = new Graph();
+  const sortedEdges = graph.getAllEdges().sort((a, b) => {
+    if (a.weight === b.weight) return 0;
+    return a.weight < b.weight ? -1 : 1;
   });
 
-  // Go through all edges started from the minimum one and try to add them
-  // to minimum spanning tree. The criteria of adding the edge would be whether
-  // it is forms the cycle or not (if it connects two vertices from one disjoint
-  // set or not).
-  for (let edgeIndex = 0; edgeIndex < sortedEdges.length; edgeIndex += 1) {
-    /** @var {GraphEdge} currentEdge */
-    const currentEdge = sortedEdges[edgeIndex];
+  const disjointedSet = new DisjointSet((v) => v.getKey());
 
-    // Check if edge forms the cycle. If it does then skip it.
-    if (!disjointSet.inSameSet(currentEdge.startVertex, currentEdge.endVertex)) {
-      // Unite two subsets into one.
-      disjointSet.union(currentEdge.startVertex, currentEdge.endVertex);
+  graph.getAllVertices().forEach((v) => disjointedSet.makeSet(v));
 
-      // Add this edge to spanning tree.
-      minimumSpanningTree.addEdge(currentEdge);
+  for (const edge of sortedEdges) {
+    if (!disjointedSet.inSameSet(edge.startVertex, edge.endVertex)) {
+      disjointedSet.union(edge.startVertex, edge.endVertex);
+      resultGraph.addEdge(edge);
     }
   }
 
-  return minimumSpanningTree;
+  return resultGraph;
 }
